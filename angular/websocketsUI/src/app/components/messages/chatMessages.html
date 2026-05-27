@@ -1,0 +1,82 @@
+<div class="messages-viewport" #scrollContainer (scroll)="onScroll()">
+    <div class="messages-list">
+    
+    <!-- Empty State -->
+    <div *ngIf="messages.length === 0" class="empty-state">
+        <span class="empty-icon">💭</span>
+        <h3>No messages yet</h3>
+        <p>Start the conversation by sending a message below!</p>
+    </div>
+
+    <div *ngFor="let m of messages" [class]="'message-row ' + (m.type === 'SYSTEM' ? 'system-row' : (m.sender === currentUser ? 'self-row' : 'other-row'))">
+        
+        <!-- System Message -->
+        <div *ngIf="m.type === 'SYSTEM'" class="system-message">
+        <span class="system-tag">SYSTEM</span>
+        <span class="system-text">{{ m.content }}</span>
+        </div>
+
+        <!-- Chat Message -->
+        <ng-container *ngIf="m.type === 'CHAT'">
+        <!-- Avatar for other users -->
+        <div 
+            *ngIf="m.sender !== currentUser" 
+            class="message-avatar" 
+            [class]="getAvatarColorClass(m.sender)"
+            [title]="m.sender"
+        >
+            {{ getInitials(m.sender) }}
+        </div>
+
+        <div class="message-bubble-wrapper">
+            <div class="message-header" *ngIf="m.sender !== currentUser">
+            <span class="sender-name">{{ m.sender }}</span>
+            <span class="message-time">{{ m.timestamp | date:'shortTime' }}</span>
+            </div>
+
+            <div class="message-bubble-container">
+            <div class="message-bubble" [class]="m.sender === currentUser ? currentUserColor : 'gray-bubble'">
+                <div class="message-text">{{ m.content }}</div>
+            </div>
+
+            <!-- Hover Reaction Bar -->
+            <div class="hover-reaction-bar">
+                <button 
+                *ngFor="let emoji of quickEmojis" 
+                (click)="onReact(emoji, m)" 
+                class="quick-react-btn"
+                [title]="emoji"
+                >
+                {{ emoji }}
+                </button>
+            </div>
+            </div>
+
+            <!-- Reactions List -->
+            <div class="message-reactions-row" *ngIf="hasReactions(m)">
+            <button 
+                *ngFor="let entry of getReactionsArray(m)" 
+                class="reaction-badge"
+                [class.user-reacted]="hasUserReacted(entry.users)"
+                (click)="onReact(entry.emoji, m)"
+                [title]="entry.users.join(', ')"
+            >
+                <span class="reaction-emoji">{{ entry.emoji }}</span>
+                <span class="reaction-count">{{ entry.users.length }}</span>
+            </button>
+            </div>
+        </div>
+
+        <!-- Avatar for current user on the right -->
+        <div 
+            *ngIf="m.sender === currentUser" 
+            class="message-avatar self-avatar" 
+            [class]="currentUserColor"
+        >
+            {{ getInitials(m.sender) }}
+        </div>
+        </ng-container>
+
+    </div>
+    </div>
+</div>

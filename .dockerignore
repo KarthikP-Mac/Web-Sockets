@@ -1,0 +1,19 @@
+# Angular
+angular/websocketsUI/node_modules/
+angular/websocketsUI/dist/
+angular/websocketsUI/.angular/
+
+# Spring Boot
+websockets/websockets/target/
+
+# IDEs & OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+*.md

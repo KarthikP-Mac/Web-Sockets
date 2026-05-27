@@ -1,0 +1,53 @@
+<div class="sidebar">
+    <div class="sidebar-brand">
+    <!-- <span class="brand-logo">⚡</span>
+    <div class="brand-info">
+        <h2>LiveWave</h2>
+        <span class="version-tag">v1.0 Stomp</span>
+    </div> -->
+    <span class="brand-logo">🌊</span>
+        <div class="brand-info">
+            <h2>LiveWave</h2>
+            <span class="live-badge">
+                <span class="dot"></span>
+                Global Live Chat
+            </span>
+        </div>
+    </div>
+
+    <div class="sidebar-status-card">
+    <div class="status-indicator">
+        <span class="status-dot" [class]="status.toLowerCase()"></span>
+        <span class="status-text">{{ status }}</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-label">Active Connections</span>
+        <div class="stat-value-group">
+        <span class="stat-value">{{ onlineUsers }}</span>
+        <span class="pulse-ring"></span>
+        </div>
+    </div>
+    </div>
+
+    <div class="sidebar-info-banner">
+    <h3>Room Details</h3>
+    <p>You are in the public <strong>#messages</strong> channel. Send messages, react with emojis, or check active typing states.</p>
+    </div>
+
+    <div class="sidebar-spacer"></div>
+
+    <div class="user-profile-section">
+    <div class="profile-card">
+        <div class="user-avatar" [class]="userColor">
+        {{ getInitials(username) }}
+        </div>
+        <div class="user-info">
+        <span class="username">{{ username }}</span>
+        <span class="user-role">Member</span>
+        </div>
+        <button class="logout-btn" (click)="onLogout()" title="Leave chatroom">
+        ⏻
+        </button>
+    </div>
+    </div>
+</div>
