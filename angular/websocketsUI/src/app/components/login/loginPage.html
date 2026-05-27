@@ -43,6 +43,17 @@
         <button type="submit" class="submit-btn" [disabled]="!username.trim()">
         Get Started
         </button>
+
+        <div class="share-link">
+        <p>Invite others to this chat room: 😉</p>
+        <div class="share-row">
+            <input type="text" [value]="shareLink" [title]="shareLink" readonly />
+            <button type="button" class="copy-btn" [title]="'Copy to Share Link!'" (click)="copyShareLink()">
+            Copy Link
+            </button>
+        </div>
+        <span class="share-status" *ngIf="shareStatus">{{ shareStatus }}</span>
+        </div>
     </form>
     </div>
 </div>

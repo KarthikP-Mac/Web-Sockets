@@ -11,6 +11,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class ChatLoginComponent {
   username = '';
+  shareLink = '';
+  shareStatus = '';
+
+  constructor() {
+    if (typeof window !== 'undefined') {
+      this.shareLink = window.location.href;
+    }
+  }
 
   colors = [
     { name: 'purple', value: 'linear-gradient(135deg, #a855f7, #7e22ce)' },
@@ -24,6 +32,23 @@ export class ChatLoginComponent {
   selectedColor = signal('purple');
 
   @Output() login = new EventEmitter<{ username: string; color: string }>();
+
+  copyShareLink() {
+    if (!this.shareLink) {
+      this.shareStatus = 'Link unavailable';
+      return;
+    }
+
+    navigator.clipboard.writeText(this.shareLink).then(
+      () => {
+        this.shareStatus = 'Copied to clipboard!';
+        setTimeout(() => (this.shareStatus = ''), 2400);
+      },
+      () => {
+        this.shareStatus = 'Copy failed. Please copy manually.';
+      }
+    );
+  }
 
   onSubmit() {
     if (this.username.trim()) {

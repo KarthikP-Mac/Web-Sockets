@@ -228,6 +228,7 @@ input::placeholder {
 @media (max-width: 768px) {
     .input-area-container {
         padding: 12px 16px;
+        padding-bottom: 100px;
     }
     .typing-indicator-bar {
         left: 16px;
@@ -251,6 +252,7 @@ input::placeholder {
 @media (max-width: 480px) {
     .input-area-container {
         padding: 8px 12px;
+        padding-bottom: 220px;
     }
     .typing-indicator-bar {
         left: 12px;
@@ -268,5 +270,33 @@ input::placeholder {
     }
     .send-icon {
         font-size: 0.95rem;
+    }
+}
+
+
+
+// @media (max-width: 1396.36px){
+//     .input-area-container {
+//         padding: 8px 12px;
+//         padding-bottom: 220px;
+//     }
+// }
+
+@media only screen and (min-width:800px) and (max-width:1024px){
+    .input-area-container {
+        padding: 8px 12px;
+        padding-bottom: 220px;
+    }
+}
+@media only screen and (min-device-width: 412px) and (max-device-width: 800px){
+    .input-area-container {
+        padding: 8px 12px;
+        padding-bottom: 220px;
+    }
+}
+@media only screen and (max-device-width: 412px){
+    .input-area-container {
+        padding: 8px 12px;
+        padding-bottom: 220px;
     }
 }
