@@ -27,6 +27,7 @@ import { ChatInputComponent } from './inputChat/chat-input';
         [username]="username()"
         [userColor]="userColor()"
         (logout)="onLogout()"
+        (refresh)="onRefresh()"
       ></app-chat-sidebar>
 
       <!-- Chat Workspace -->
@@ -210,6 +211,14 @@ export class ChatMainComponent implements OnInit, OnDestroy {
     this.loggedIn.set(false);
     // Refresh to disconnect cleanly
     window.location.reload();
+  }
+
+  onRefresh() {
+    if (this.wsStatus() !== 'CONNECTED') {
+      this.initializeWebSocket();
+    } else {
+      this.ws.refreshActiveConnections();
+    }
   }
 
   private initializeWebSocket() {

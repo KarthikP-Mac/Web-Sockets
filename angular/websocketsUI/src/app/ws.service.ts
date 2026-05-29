@@ -25,7 +25,7 @@ export class WsService {
       const backendUrl = this.resolveBackendUrl();
       const socket = new SockJS(`${backendUrl}/ws`);
       this.stompClient = Stomp.over(socket);
-      this.stompClient.debug = () => {}; // Suppress console noise
+      this.stompClient.debug = () => { }; // Suppress console noise
 
       this.stompClient.connect({},
         () => {
@@ -79,6 +79,12 @@ export class WsService {
   react(msg: any) {
     if (this.stompClient && this.status() === 'CONNECTED') {
       this.stompClient.send('/app/reaction', {}, JSON.stringify(msg));
+    }
+  }
+
+  refreshActiveConnections() {
+    if (this.stompClient && this.status() === 'CONNECTED') {
+      this.stompClient.send('/app/users/refresh', {}, {});
     }
   }
 

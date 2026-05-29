@@ -39,6 +39,12 @@ public class ChatController {
         template.convertAndSend("/topic/reactions", msg);
     }
 
+    // REFRESH USERS
+    @MessageMapping("/users/refresh")
+    public void refreshUsers() {
+        template.convertAndSend("/topic/users", tracker.count());
+    }
+
     private boolean isBlocked(String text) {
         String lower = text.toLowerCase();
 

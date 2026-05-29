@@ -7,6 +7,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
+import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 
 @Component
 public class WebSocketEventListener {
@@ -23,6 +24,14 @@ public class WebSocketEventListener {
         String sessionId = headers.getSessionId();
         tracker.add(sessionId);
         sendCount();
+    }
+
+    @EventListener
+    public void handleSubscribe(SessionSubscribeEvent event) {
+        StompHeaderAccessor headers = StompHeaderAccessor.wrap(event.getMessage());
+        if ("/topic/users".equals(headers.getDestination())) {
+            sendCount();
+        }
     }
 
     @EventListener

@@ -15,6 +15,8 @@ export class ChatSidebarComponent {
   @Input() userColor: string = 'purple';
 
   @Output() logout = new EventEmitter<void>();
+  @Output() refresh = new EventEmitter<void>();
+  isRefreshing = false;
 
   getInitials(name: string): string {
     if (!name) return 'U';
@@ -23,5 +25,13 @@ export class ChatSidebarComponent {
 
   onLogout() {
     this.logout.emit();
+  }
+
+  onRefresh() {
+    this.isRefreshing = true;
+    this.refresh.emit();
+    setTimeout(() => {
+      this.isRefreshing = false;
+    }, 800);
   }
 }
