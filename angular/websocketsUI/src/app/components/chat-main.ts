@@ -118,21 +118,24 @@ import { ChatInputComponent } from './inputChat/chat-input';
     @media (max-width: 768px) {
       .workspace-header {
         display: flex;
+        position: sticky;
+        top: 0;
       }
       .sidebar-overlay {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.5);
-        z-index: 99;
+        z-index: 105;
         backdrop-filter: blur(2px);
       }
       app-chat-sidebar {
-        position: absolute;
-        z-index: 100;
-        height: 100%;
+        position: fixed;
+        z-index: 110;
+        top: 0;
+        bottom: 0;
         left: 0;
         transform: translateX(-100%);
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
