@@ -256,3 +256,21 @@ input:focus {
         font-size: 0.9rem;
     }
 }
+
+@media (max-width: 430px) and (min-width: 380px) {
+    .copy-btn {
+        min-width: 55px;
+        max-width: 60px;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+}
+}
+
+@media (max-width: 380px) {
+    .copy-btn {
+        min-width: 50px;
+        max-width: 55px;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+}
